@@ -1,0 +1,13 @@
+ru\tanya\globalmarket\model\CurrencyNominal.class
+ru\tanya\globalmarket\service\CurrencyConverter.class
+ru\tanya\globalmarket\model\Money.class
+ru\tanya\globalmarket\service\FileDataSource.class
+ru\tanya\globalmarket\model\Currency.class
+ru\tanya\globalmarket\service\CurrencyConverter$1.class
+ru\tanya\globalmarket\model\forge1\Forge1CurrencyInfo.class
+ru\tanya\globalmarket\model\Product.class
+ru\tanya\globalmarket\service\CurrencyDataSource.class
+ru\tanya\globalmarket\service\Forge1DataSource.class
+ru\tanya\globalmarket\App.class
+ru\tanya\globalmarket\service\CurrencyService.class
+ru\tanya\globalmarket\model\forge1\Forge1Response.class

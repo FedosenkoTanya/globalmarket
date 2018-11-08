@@ -1,4 +1,8 @@
 package ru.tanya.globalmarket.model;
 
-public class Currency {
+/**
+ * Пеечень рассматриваемых валют
+ */
+public enum Currency {
+    USD, RUB, EUR
 }
