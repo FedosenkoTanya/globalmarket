@@ -26,6 +26,7 @@ public class CurrencyConverter {
             switch (convertToCurrency) {
                 case RUB: {
                     unitValue = money.getValue() * currencyNominal.unitRUB;
+                    System.out.println(unitValue);
                     break;
                 }
                 case EUR: {

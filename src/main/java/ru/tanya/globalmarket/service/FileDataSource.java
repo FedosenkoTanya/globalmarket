@@ -37,10 +37,10 @@ public class FileDataSource implements CurrencyDataSource {
 
             double unitUSD = Double.parseDouble(currencyAsStringArray[0]);
             double unitEUR = Double.parseDouble(currencyAsStringArray[1]);
-            double unitRUB = Double.parseDouble(currencyAsStringArray[1]);
+            double unitRUB = Double.parseDouble(currencyAsStringArray[2]);
 
-            CurrencyNominal returnNominal = new CurrencyNominal(unitUSD, unitEUR, unitRUB);
-
+            CurrencyNominal returnNominal = new CurrencyNominal(unitUSD, unitRUB, unitEUR);
+            System.out.println(returnNominal);
             return returnNominal;
         }
     }

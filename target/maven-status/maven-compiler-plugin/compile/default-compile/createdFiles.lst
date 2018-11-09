@@ -1,4 +1,5 @@
 ru\tanya\globalmarket\model\CurrencyNominal.class
+ru\tanya\globalmarket\service\Reader.class
 ru\tanya\globalmarket\service\CurrencyConverter.class
 ru\tanya\globalmarket\model\Money.class
 ru\tanya\globalmarket\service\FileDataSource.class

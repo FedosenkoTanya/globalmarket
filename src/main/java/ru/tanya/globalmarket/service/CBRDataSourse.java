@@ -13,35 +13,14 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Scanner;
-
-public class Reader {
-    public CurrencyNominal getCurr(String filename, String path) {
-        try {
-            Double k[] = new Double[3];
-            File file = new File(path, filename);
-
-            System.out.println("File path: " + file.getAbsolutePath());
-            if (file.exists()) {
-                Scanner scanner = new Scanner(file);
-                String nextLine = scanner.nextLine();
-                Scanner num = new Scanner(nextLine);
-                k[0] = num.nextDouble();
-                k[1] = num.nextDouble();
-                k[2] = num.nextDouble();
-                CurrencyNominal currencyNominal = new CurrencyNominal(k[0], k[1], k[2]);
-                //System.out.println(currencyNominal);
-                return currencyNominal;
-            }
-        } catch (Throwable e) {
-        }
-        return null;
-    }
 
 
-    public CurrencyNominal getCurrencies_from_site(LocalDate data) throws Throwable {
+public class CBRDataSourse implements CurrencyDataSource {
+
+    @Override
+    public CurrencyNominal getCurrencyNominalByDate(LocalDate data) throws Exception {
         Double k[] = new Double[3];
-        //File file = new File(path, filename);
+
         URL url = new URL("http://www.cbr.ru/scripts/XML_daily_eng.asp?date_req=" + String.format("%02d", data.getDayOfMonth()) + "/" + data.getMonthValue() + "/" + data.getYear());
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
@@ -52,7 +31,7 @@ public class Reader {
             while ((s = inputStream.readLine()) != null) {
                 stringBuilder.append(s);
             }
-            System.out.println(stringBuilder);
+            //System.out.println(stringBuilder);
 
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -71,10 +50,12 @@ public class Reader {
                     Element element = (Element) node;
 
                     String id = element.getAttribute("ID");
+                    //EUR
                     if (id.equals("R01239")) {
                         k[1] = Double.parseDouble(element.getElementsByTagName("Value").item(0).getTextContent()
                                 .replace(",", "."));
                     }
+                    //USD
                     if (id.equals("R01235")) {
                         k[2] = Double.parseDouble(element.getElementsByTagName("Value").item(0).getTextContent()
                                 .replace(",", "."));
@@ -82,13 +63,13 @@ public class Reader {
                 }
             }
             k[0] = 1.;
-            //FileWriter fileWriter = new FileWriter(path + filename);
-            //fileWriter.write("1 " + k[1].toString().replace(".", ",") + " " + k[2].toString().replace(".", ","));
-            //fileWriter.close();
-        }
-        CurrencyNominal currencyNominal = new CurrencyNominal(k[0], k[1], k[2]);
 
+        }
+
+        CurrencyNominal currencyNominal = new CurrencyNominal(k[0], k[2], k[2]/k[1]);
+        //System.out.println(currencyNominal);
         return currencyNominal;
     }
+
 
 }

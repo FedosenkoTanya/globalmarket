@@ -30,8 +30,8 @@ public class CurrencyService {
             currencyNominal = fileDataSource.getCurrencyNominalByDate(date);
         } else {
             //если файла нет то получаем его из внешнего источника
-            Reader reader = new Reader();
-            currencyNominal = reader.getCurrencies_from_site(date);
+            CBRDataSourse reader = new CBRDataSourse();
+            currencyNominal = reader.getCurrencyNominalByDate(date);
 
             //сохраняем данные в файл
             fileDataSource.saveCurrencyNominal(date, currencyNominal);
